@@ -1,0 +1,158 @@
+<section class="container">
+  <app-banner [bigBanner]="bigBanner"></app-banner>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <div class="logo">
+      <div class="image"></div>
+    </div>
+    <form #f="ngForm" (ngSubmit)="login(f)">
+      <div class="login">
+        <div class="user">
+          <div class="icon person"></div>
+          <input type="text" name="userLogin" placeholder="Login" ngModel />
+        </div>
+        <div class="password">
+          <div class="icon locker"></div>
+          <input
+            [type]="viewPassword ? 'text' : 'password'"
+            name="passwordLogin"
+            placeholder="Senha"
+            ngModel
+          />
+          <div class="icon eye" (click)="viewPassword = !viewPassword"></div>
+        </div>
+      </div>
+      <input class="button" type="submit" value="Entrar" />
+    </form>
+    <div class="createAccount">
+      <div class="divider"></div>
+      <button (click)="showModal()">Criar Conta</button>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="backdrop" (click)="closeModal()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModal()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Ficha Cadastral</h2>
+      <form #m="ngForm" (ngSubmit)="createAccount(m)">
+        <div class="account">
+          <div class="row">
+            <div class="email">
+              <input
+                type="text"
+                name="emailModal"
+                placeholder="E-mail"
+                ngModel
+              />
+            </div>
+            <div class="password">
+              <input
+                [type]="viewPasswordModal ? 'text' : 'password'"
+                name="passwordModal"
+                placeholder="Senha"
+                ngModel
+              />
+              <div
+                class="icon eye"
+                (click)="viewPasswordModal = !viewPasswordModal"
+              ></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="firstName">
+              <input
+                type="text"
+                name="firstNameModal"
+                placeholder="Nome"
+                ngModel
+              />
+            </div>
+            <div class="lastName">
+              <input
+                type="text"
+                name="lastNameModal"
+                placeholder="Sobrenome"
+                ngModel
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="cpf">
+              <input type="text" name="cpfModal" placeholder="CPF" ngModel />
+            </div>
+            <div class="typeAccount">
+              <p>Perfil de:</p>
+              <div class="inputs">
+                <div class="team">
+                  <input
+                    type="radio"
+                    name="roleTypeModal"
+                    value="ROLE_RECRUITER"
+                    ngModel
+                    (change)="enableOpenToWork = false"
+                  />
+                  <label>Recrutador</label>
+                </div>
+                <div class="player">
+                  <input
+                    type="radio"
+                    name="roleTypeModal"
+                    value="ROLE_WORKER"
+                    ngModel
+                    (change)="enableOpenToWork = true"
+                  />
+                  <label>Candidato</label>
+                </div>
+              </div>
+            </div>
+            <div class="work">
+              <p *ngIf="enableOpenToWork">Aberto a vagas:</p>
+              <div class="inputs" *ngIf="enableOpenToWork">
+                <div class="openToWork">
+                  <input
+                    type="radio"
+                    name="openToWorkModal"
+                    value="true"
+                    ngModel
+                  />
+                  <label>Sim</label>
+                </div>
+                <div class="closedToWork">
+                  <input
+                    type="radio"
+                    name="openToWorkModal"
+                    value="false"
+                    ngModel
+                  />
+                  <label>Não</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Criar" />
+      </form>
+    </div>
+  </div>
+</div>

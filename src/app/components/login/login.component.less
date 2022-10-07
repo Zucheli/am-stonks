@@ -1,0 +1,299 @@
+@import url(../../app.component.less);
+
+.container {
+    width: calc(100% - 1px);
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto 1px minmax(300px, 400px);
+
+    app-banner {
+        width: 100%;
+        height: 100%;
+    }
+
+    .divider {
+        width: 100%;
+        height: 100%;
+        opacity: 20%;
+        border: 1px solid @gray;
+    }
+
+    .content {
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        padding: 0 50px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        .logo {
+            .image {
+                width: 150px;
+                height: 150px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-image: url(../../../assets/eyou-logo.png);
+            }
+        }
+
+        form {
+            gap: 50px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .login {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .user, .password {
+                    width: 100%;
+                    height: 65px;
+                    background-color: @darkGray;
+
+                    .icon {
+                        &.person, &.locker, &.eye {
+                            background-size: 70%;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                        }
+                    }
+
+                    input {
+                        width: 100%;
+                        border: none;
+                        outline: none;
+                        color: @white;
+                        grid-area: input;
+                        background-color: transparent;
+                    }
+                }
+
+                .user {
+                    display: grid;
+                    grid-template-columns: 40px auto;
+                    border-bottom: 1px solid @gray;
+                    grid-template-areas: 'person input';
+
+                    .icon {
+                        &.person {
+                            grid-area: person;
+                            background-image: url(../../../assets/icons/user.svg);
+                        }
+                    }
+                }
+
+                .password {
+                    display: grid;
+                    grid-template-columns: 40px auto 40px;
+                    grid-template-areas: 'locker input eye';
+
+                    .icon {
+                        &.locker {
+                            grid-area: locker;
+                            background-image: url(../../../assets/icons/locker.svg);
+                        }
+
+                        &.eye {
+                            grid-area: eye;
+                            cursor: pointer;
+                            background-image: url(../../../assets/icons/eye.svg);
+                        }
+                    }
+                }
+            }
+
+            .button {
+                width: 100%;
+                height: 65px;
+                border: none;
+                color: @white;
+                cursor: pointer;
+                text-align: center;
+                font-family: 'Inter';
+                background-color: @darkGray;
+            }
+        }
+
+        .createAccount {
+            gap: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .divider {
+                width: 100%;
+                height: 1px;
+                border: 1px solid @darkGray;
+            }
+
+            button {
+                width: 100%;
+                height: 65px;
+                border: none;
+                color: @white;
+                cursor: pointer;
+                text-align: center;
+                font-family: 'Inter';
+                background-color: @darkGray;
+            }
+        }
+    }
+}
+
+.modal {
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+
+    .backdrop {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modalContainer {
+        z-index: 2;
+        width: 50%;
+        height: 55%;
+        border-radius: 12px;
+        background-color: @background;
+
+        .close {
+            text-align: end;
+            position: relative;
+            margin: 5px 5px 0 0;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        .modalContent {
+            gap: 20px;
+            width: 100%;
+            height: calc(100% - 53px);
+            display: flex;
+            overflow: auto;
+            padding: 0 20px;
+            margin: 0 0 20px;
+            flex-direction: column;
+
+            h2 {
+                text-align: center;
+            }
+
+            form {
+                gap: 50px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+    
+                .account {
+                    gap: 20px;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .row {
+                        gap: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        input {
+                            width: 100%;
+                            border: none;
+                            outline: none;
+                            color: @white;
+                            grid-area: input;
+                            background-color: transparent;
+                        }
+
+                        .email, .password, .firstName, .lastName, .cpf{
+                            width: 50%;
+                            height: 40px;
+                            display: flex;
+                            padding: 0 10px;
+                            align-items: center;
+                            border-radius: 12px;
+                            background-color: @darkGray;
+                        }
+
+                        .password {
+                            display: grid;
+                            padding: 0 0 0 10px;
+                            grid-template-columns: auto 40px;
+                            grid-template-areas: 'input eye';
+
+                            .icon {
+                                &.eye {
+                                    width: 100%;
+                                    height: 100%;
+                                    grid-area: eye;
+                                    cursor: pointer;
+                                    background-size: 70%;
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    background-image: url(../../../assets/icons/eye.svg);
+                                }
+                            }
+                        }
+
+                        .cpf {
+                            width: 30%;
+                        }
+
+                        .typeAccount, .work{
+                            gap: 5px;
+                            width: 30%;
+                            display: flex;
+                            text-align: center;
+                            align-items: center;
+                            flex-direction: column;
+
+                            .inputs {
+                                gap: 10px;
+                                display: flex;
+
+                                .team, .player, .openToWork, .closedToWork {
+                                    gap: 5px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    input {
+                                        width: 15px;
+                                        height: 15px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                .button {
+                    width: 100%;
+                    height: 65px;
+                    border: none;
+                    color: @white;
+                    cursor: pointer;
+                    text-align: center;
+                    border-radius: 12px;
+                    font-family: 'Inter';
+                    background-color: @darkGray;
+                }
+            }
+        }
+    }
+}
