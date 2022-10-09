@@ -1,3 +1,234 @@
 <section class="container">
   <app-header></app-header>
+
+  <div class="content">
+    <app-mini-profile></app-mini-profile>
+
+    <div class="divider"></div>
+
+    <div class="home">
+      <button
+        class="createVacancy"
+        (click)="showModalAdd()"
+        *ngIf="roleType == 'ROLE_RECRUITER'"
+      >
+        <p>Adicionar vaga</p>
+        <div class="icon"></div>
+      </button>
+      <div class="vacancies">
+        <div class="card" *ngFor="let vacancy of arrayVacancies">
+          <div class="description">
+            <div class="titleCard">
+              <p><i>descrição:</i></p>
+              <div
+                class="icon"
+                (click)="showModalEdit(vacancy)"
+                *ngIf="roleType == 'ROLE_RECRUITER'"
+              ></div>
+            </div>
+            <div class="contentCard">
+              <p>
+                {{ vacancy.description }}
+              </p>
+            </div>
+          </div>
+          <div class="infos">
+            <div class="name">
+              <span><i>vaga:</i></span>
+              <p>{{ vacancy.name }}</p>
+            </div>
+            <div class="country">
+              <span><i>país:</i></span>
+              <p>{{ vacancy.country }}</p>
+            </div>
+            <div class="contract">
+              <span><i>contrato:</i></span>
+              <p>{{ vacancy.contractType }}</p>
+            </div>
+            <div class="candidate" *ngIf="roleType == 'ROLE_WORKER'">
+              <button (click)="applyVacancy(vacancy)">Candidatar-se</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<div class="modalAdd" id="modalAdd">
+  <div class="backdrop" (click)="closeModalAdd()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModalAdd()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Criar vaga</h2>
+      <form #mA="ngForm" (ngSubmit)="createVacancy(mA)">
+        <div class="vacancy">
+          <div class="row">
+            <div class="group">
+              <div class="name">
+                <input
+                  type="text"
+                  name="nameModalAdd"
+                  placeholder="Nome da vaga"
+                  [(ngModel)]="nameModalAdd"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <div class="description">
+                <textarea
+                  name="descriptionModalAdd"
+                  placeholder="Descrição da vaga"
+                  [(ngModel)]="descriptionModalAdd"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Selecione o país da vaga:</label>
+              <div class="country">
+                <select name="countryModalAdd" [(ngModel)]="countryModalAdd">
+                  <option
+                    *ngFor="let country of arrayCountries"
+                    [value]="country"
+                  >
+                    {{ country }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="group">
+              <label>Selecio o tipo de contrato da vaga:</label>
+              <div class="contract">
+                <select name="contractModalAdd" [(ngModel)]="contractModalAdd">
+                  <option
+                    *ngFor="let contract of arrayContract"
+                    [value]="contract"
+                  >
+                    {{ contract }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Criar" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modalEdit" id="modalEdit">
+  <div class="backdrop" (click)="closeModalEdit()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModalEdit()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Editar vaga</h2>
+      <form #mE="ngForm" (ngSubmit)="saveVacancy(mE)">
+        <div class="vacancy">
+          <div class="row">
+            <div class="group">
+              <div class="name">
+                <input
+                  type="text"
+                  name="nameModalEdit"
+                  placeholder="Nome da vaga"
+                  [(ngModel)]="nameModalEdit"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <div class="description">
+                <textarea
+                  name="descriptionModalEdit"
+                  placeholder="Descrição da vaga"
+                  [(ngModel)]="descriptionModalEdit"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Selecione o país da vaga:</label>
+              <div class="country">
+                <select name="countryModalEdit" [(ngModel)]="countryModalEdit">
+                  <option
+                    *ngFor="let country of arrayCountries"
+                    [value]="country"
+                  >
+                    {{ country }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="group">
+              <label>Selecio o tipo de contrato da vaga:</label>
+              <div class="contract">
+                <select
+                  name="contractModalEdit"
+                  [(ngModel)]="contractModalEdit"
+                >
+                  <option
+                    *ngFor="let contract of arrayContract"
+                    [value]="contract"
+                  >
+                    {{ contract }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="group">
+              <label class="concludedLabel">Encerrar vaga:</label>
+              <div class="concluded">
+                <input
+                  type="checkbox"
+                  name="switchModalEdit"
+                  id="switch"
+                  ngModel
+                /><label for="switch">Toggle</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Salvar" />
+      </form>
+    </div>
+  </div>
+</div>

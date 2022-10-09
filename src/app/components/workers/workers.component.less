@@ -1,0 +1,44 @@
+@import url(../../app.component.less);
+
+.container {
+    width: 100%;
+    height: 100vh;
+
+    .content {
+        width: 70%;
+        height: 100%;
+        margin: auto;
+        display: grid;
+        padding-top: 70px;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: 30% 1px auto;
+
+        app-mini-profile {
+            width: 100%;
+            height: 100%;
+        }
+
+        .divider {
+            width: 100%;
+            height: 100%;
+            opacity: 20%;
+            border: 1px solid @gray;
+        }
+
+        .workers {
+            gap: 20px;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+
+            .worker {
+                width: 100%;
+                height: 200px;
+                background-color: @darkGray;
+            }
+        }
+    }
+}

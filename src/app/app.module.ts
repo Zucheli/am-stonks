@@ -9,9 +9,19 @@ import { LoginComponent } from './components/login/login.component';
 import { BannerComponent } from './components/partials/banner/banner.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/partials/header/header.component';
+import { MiniProfileComponent } from './components/partials/mini-profile/mini-profile.component';
+import { WorkersComponent } from './components/workers/workers.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, BannerComponent, HomeComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    BannerComponent,
+    HomeComponent,
+    HeaderComponent,
+    MiniProfileComponent,
+    WorkersComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, CoreModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

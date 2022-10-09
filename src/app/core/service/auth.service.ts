@@ -15,6 +15,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  contractTypes(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/contract-types`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  countries(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/countries`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
   login(login: any): Observable<any> {
     const body = new HttpParams()
       .set('username', login.username)
@@ -34,6 +46,62 @@ export class AuthService {
 
   userLogged(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/users/authenticated`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  userOpenToWork(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/users`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  userUpdate(id: any, request: any, image: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('image', image);
+    formData.append('user', request);
+
+    return this.http.put<any>(`${this.baseURL}/users/${id}`, formData, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  userInfos(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/users/${id}`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  vacanciesRecruiter(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/vacancies/creator`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  vacanciesWorkers(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/vacancies`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  vacancyCreate(request: any): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/vacancies/create`, request, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  vacancyUptade(id: any, request: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseURL}/vacancies/${id}/update`,
+      request,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+      }
+    );
+  }
+
+  vacancyApply(id: any): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/vacancies/${id}/apply`, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
     });
   }
