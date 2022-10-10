@@ -2,7 +2,14 @@
   <div class="content">
     <div class="icon" (click)="showModal()"></div>
     <div class="top">
-      <div class="image"></div>
+      <div
+        class="image"
+        [style.backgroundImage]="
+          image == null
+            ? 'url(../../../../assets/imageDefault.png)'
+            : 'url(' + image + ')'
+        "
+      ></div>
       <div class="name">
         <p>{{ firstName }} {{ lastName }}</p>
       </div>
@@ -11,39 +18,10 @@
       <div class="email">
         <p>{{ email }}</p>
       </div>
-      <div class="recruiter" *ngIf="roleType == 'ROLE_RECRUITER'">
-        <div class="vacancies">
-          <p><span>número de vagas:</span> {{ numberVacancies }}</p>
-        </div>
-      </div>
       <div class="worker" *ngIf="roleType == 'ROLE_WORKER'">
         <div class="openToWork">
           <p><span>aberto a vagas:</span> {{ openToWork }}</p>
         </div>
-        <!-- <div class="jobs">
-          <p *ngIf="jobExperiences.length == 0">
-            <span>adicionar trabalho</span>
-            <span class="plus"></span>
-          </p>
-        </div>
-        <div class="academic">
-          <p *ngIf="academicFormation.length == 0">
-            <span>adicionar formação</span>
-            <span class="plus"></span>
-          </p>
-        </div>
-        <div class="skills">
-          <p *ngIf="skills.length == 0">
-            <span>adicionar skill</span>
-            <span class="plus"></span>
-          </p>
-        </div>
-        <div class="certificate">
-          <p *ngIf="certificates.length == 0">
-            <span>conseguir certificado</span>
-            <span class="plus" routerLink="/tests"></span>
-          </p>
-        </div> -->
       </div>
     </div>
   </div>
@@ -75,34 +53,23 @@
         <div class="account">
           <div class="row">
             <div class="group">
-              <div class="image"></div>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                accept="image/png, image/jpeg"
-              />
+              <label>Nome:</label>
+              <div class="firstName">
+                <input
+                  type="text"
+                  name="firstNameModal"
+                  [(ngModel)]="firstName"
+                />
+              </div>
             </div>
             <div class="group">
-              <div class="subgroup">
-                <label>Nome:</label>
-                <div class="firstName">
-                  <input
-                    type="text"
-                    name="firstNameModal"
-                    [(ngModel)]="firstName"
-                  />
-                </div>
-              </div>
-              <div class="subgroup">
-                <label>Sobrenome:</label>
-                <div class="lastName">
-                  <input
-                    type="text"
-                    name="lastNameModal"
-                    [(ngModel)]="lastName"
-                  />
-                </div>
+              <label>Sobrenome:</label>
+              <div class="lastName">
+                <input
+                  type="text"
+                  name="lastNameModal"
+                  [(ngModel)]="lastName"
+                />
               </div>
             </div>
           </div>
@@ -117,6 +84,231 @@
               <label>CPF:</label>
               <div class="cpf">
                 <input type="text" name="cpfModal" [(ngModel)]="cpf" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Foto de perfil:</label>
+              <input
+                type="file"
+                id="image"
+                name="imageModal"
+                (change)="selectFile($event)"
+                accept="image/png, image/jpeg"
+              />
+            </div>
+            <div class="group" *ngIf="roleType == 'ROLE_WORKER'">
+              <label class="openToWorkLabel">Aberto a vagas:</label>
+              <div class="openToWork">
+                <input
+                  type="checkbox"
+                  name="openToWorkModal"
+                  id="switch"
+                  [(ngModel)]="openToWorkModal"
+                /><label for="switch">Toggle</label>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="roleType == 'ROLE_WORKER'">
+            <div class="group">
+              <label>Experiências profissionais:</label>
+              <div class="jobs">
+                <div class="job" *ngFor="let job of jobExperiences">
+                  <div class="infos">
+                    <p>
+                      <span><i>cargo:</i></span> {{ job.jobTitle }}
+                    </p>
+                    <p>
+                      <span><i>empresa:</i></span> {{ job.companyName }}
+                    </p>
+                  </div>
+                  <div class="description">
+                    <span><i>descrição:</i></span>
+                    <p>{{ job.description }}</p>
+                  </div>
+                  <div class="dates">
+                    <p>
+                      <span><i>data de início:</i></span> {{ job.startDate }}
+                    </p>
+                    <p>
+                      <span><i>date de saída:</i></span> {{ job.endDate }}
+                    </p>
+                  </div>
+                </div>
+                <form #job="ngForm" (ngSubmit)="addJob(job)">
+                  <div class="add">
+                    <div class="row">
+                      <div class="group">
+                        <label>Cargo:</label>
+                        <div class="title">
+                          <input
+                            type="text"
+                            name="titleJob"
+                            [(ngModel)]="titleJob"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <label>Nome da empresa:</label>
+                        <div class="companyName">
+                          <input
+                            type="text"
+                            name="companyNameJob"
+                            [(ngModel)]="companyNameJob"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="group">
+                        <label>Descrição da Vaga:</label>
+                        <div class="description">
+                          <textarea
+                            name="descriptionJob"
+                            [(ngModel)]="descriptionJob"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="group">
+                        <label>Data de início:</label>
+                        <div class="startDate">
+                          <input
+                            type="date"
+                            name="startJob"
+                            [(ngModel)]="startJob"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <label>Data de saída:</label>
+                        <div class="endDate">
+                          <input
+                            type="date"
+                            name="endJob"
+                            [(ngModel)]="endJob"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <input class="button" type="submit" value="Adicionar" />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="roleType == 'ROLE_WORKER'">
+            <div class="group">
+              <label>Formação acadêmica:</label>
+              <div class="studies">
+                <div class="study" *ngFor="let study of academicFormation">
+                  <div class="infos">
+                    <p>
+                      <span><i>instituição:</i></span>
+                      {{ study.institutionName }}
+                    </p>
+                    <p *ngIf="study.academicFormationType == 'BACHELOR_DEGREE'">
+                      <span><i>formação:</i></span>
+                      Bacharelado
+                    </p>
+                    <p
+                      *ngIf="study.academicFormationType == 'TECHNICAL_DEGREE'"
+                    >
+                      <span><i>formação:</i></span>
+                      Técnico
+                    </p>
+                    <p *ngIf="study.academicFormationType == 'SCHOOL'">
+                      <span><i>formação:</i></span>
+                      Ensino Fundamental
+                    </p>
+                    <p *ngIf="study.academicFormationType == 'HIGH_SCHOOL'">
+                      <span><i>formação:</i></span>
+                      Ensino Médio
+                    </p>
+                  </div>
+                  <div class="description">
+                    <span><i>descrição:</i></span>
+                    <p>{{ study.description }}</p>
+                  </div>
+                  <div class="dates">
+                    <p>
+                      <span><i>data de início:</i></span> {{ study.startDate }}
+                    </p>
+                    <p>
+                      <span><i>date de término:</i></span> {{ study.endDate }}
+                    </p>
+                  </div>
+                </div>
+                <form #study="ngForm" (ngSubmit)="addStudy(study)">
+                  <div class="add">
+                    <div class="row">
+                      <div class="group">
+                        <label>Instituição:</label>
+                        <div class="title">
+                          <input
+                            type="text"
+                            name="titleStudy"
+                            [(ngModel)]="titleStudy"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <label>Formação:</label>
+                        <div class="formation">
+                          <select
+                            name="formationStudy"
+                            [(ngModel)]="formationStudy"
+                          >
+                            <option value="0">Bacharelado</option>
+                            <option value="1">Técnico</option>
+                            <option value="2">Ensino Fundamental</option>
+                            <option value="3">Ensino Médio</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="group">
+                        <label>Descrição da formação:</label>
+                        <div class="description">
+                          <textarea
+                            name="descriptionStudy"
+                            [(ngModel)]="descriptionStudy"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="group">
+                        <label>Data de início:</label>
+                        <div class="startDate">
+                          <input
+                            type="date"
+                            name="startStudy"
+                            [(ngModel)]="startStudy"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <label>Data de término:</label>
+                        <div class="endDate">
+                          <input
+                            type="date"
+                            name="endStudy"
+                            [(ngModel)]="endStudy"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <input class="button" type="submit" value="Adicionar" />
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, LOCALE_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 // Auth
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   descriptionModalEdit: string = '';
   countryModalEdit: string = '';
   contractModalEdit: string = '';
+  switchModalEdit: boolean = false;
 
   constructor(private authService: AuthService) {}
 
@@ -214,6 +215,7 @@ export class HomeComponent implements OnInit {
     this.contractModalEdit = vacancy.contractType
       .toUpperCase()
       .replace('-', '');
+    this.switchModalEdit = vacancy.concluded;
 
     if (this.contractModalEdit == 'PARTTIME') {
       this.contractModalEdit = this.contractModalEdit.replace('T', '');

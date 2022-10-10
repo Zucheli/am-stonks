@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, public router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.setItem('token', '');
+    localStorage.setItem('role', '');
+  }
 
   login(form: any) {
     let user = form.value.userLogin;

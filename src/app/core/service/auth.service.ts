@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserUpdateDto } from '../types/user-update-dto';
 
 // Envs
 import { environment } from './../../../environments/environment';
@@ -56,10 +57,13 @@ export class AuthService {
     });
   }
 
-  userUpdate(id: any, request: any, image: File): Observable<any> {
+  userUpdate(id: any, request: UserUpdateDto, image: File): Observable<any> {
+    const blob = new Blob([JSON.stringify(request)], {
+      type: 'application/json',
+    });
     const formData: FormData = new FormData();
     formData.append('image', image);
-    formData.append('user', request);
+    formData.append('user', blob);
 
     return this.http.put<any>(`${this.baseURL}/users/${id}`, formData, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),

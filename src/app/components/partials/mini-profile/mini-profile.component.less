@@ -36,7 +36,9 @@
             .image {
                 width: 100px;
                 height: 100px;
-                background-color: @lightGray;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
             }
 
             .name {
@@ -152,7 +154,6 @@
             form {
                 gap: 20px;
                 width: 100%;
-                height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -166,7 +167,7 @@
                     .row {
                         gap: 20px;
                         display: flex;
-                        align-items: center;
+                        align-items: flex-end;
                         justify-content: space-between;
 
                         .group, .subgroup{
@@ -178,24 +179,13 @@
                             label {
                                 font-size: 12px;
 
-                                &.concludedLabel {
+                                &.openToWorkLabel {
                                     text-align: center;
                                     margin-bottom: -10px;
                                 }
-
-                                &.imageLabel {
-                                    width: auto;
-                                    margin: auto;
-                                    cursor: pointer;
-                                    text-align: center;
-
-                                    &:hover {
-                                        text-decoration: underline;
-                                    }
-                                }
                             }
 
-                            input, textarea {
+                            input, textarea, select {
                                 width: 100%;
                                 height: 100%;
                                 border: none;
@@ -207,12 +197,6 @@
 
                             input[type='file'] {
                                 background-color: @darkGray;
-                            }
-
-                            input {
-                                &::-webkit-calendar-picker-indicator {
-                                    filter: invert(1);
-                                }
                             }
     
                             textarea {
@@ -230,14 +214,7 @@
                                 }
                             }
 
-                            .image {
-                                margin: auto;
-                                width: 120px;
-                                height: 120px;
-                                background-color: @lightGray;
-                            }
-
-                            .firstName, .lastName, .email, .cpf, .jobTitle, .companyName, .startDate, .endDate {
+                            .firstName, .lastName, .email, .cpf {
                                 width: 100%;
                                 height: 40px;
                                 display: flex;
@@ -246,44 +223,174 @@
                                 background-color: @darkGray;
                             }
 
-                            .descriptionJob {
-                                width: 100%;
-                                height: 100px;
-                                display: flex;
-                                padding: 10px;
-                                align-items: center;
-                                background-color: @darkGray;
-                            }
-
-                            .jobs {
+                            .jobs, .studies {
                                 gap: 10px;
                                 width: 100%;
                                 height: auto;
                                 display: flex;
-                                padding: 10px;
+                                padding: 10px 20px;
+                                align-items: center;
                                 flex-direction: column;
                                 background-color: @darkGray;
 
-                                .add {
+                                .job, .study {
+                                    gap: 5px;
+                                    width: 100%;
+                                    height: 150px;
+                                    padding: 10px;
                                     display: flex;
-                                    cursor: pointer;
-                                    align-items: center;
-                                    justify-content: center;
+                                    flex-direction: column;
+                                    border: 1px solid @lightGray;
 
                                     p {
-                                        color: @yellow;
-                                        font-size: 12px;
+                                        color: @lightGray;
                                     }
 
-                                    .plus {
-                                        width: 25px;
-                                        height: 25px;
-                                        cursor: pointer;
-                                        display: inline-block;
-                                        background-size: contain;
-                                        background-repeat: no-repeat;
-                                        background-image: url(../../../../assets/icons/plus.svg);
+                                    span {
+                                        color: @yellow;
+                                        font-size: 10px;
                                     }
+
+                                    .infos, .dates {
+                                        display: flex;
+                                        justify-content: space-between;
+                                    }
+
+                                    .description {
+                                        height: 60%;
+                                        
+                                        p {
+                                            height: 75%;
+                                            overflow: auto;
+                                            word-break: break-all;
+
+                                            &::-webkit-scrollbar {
+                                                width: 5px;
+                                            }
+                            
+                                            &::-webkit-scrollbar-track {
+                                                background: @darkGray;
+                                            }
+                            
+                                            &::-webkit-scrollbar-thumb {
+                                                background: @lightGray;
+                                                border-radius: 10px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .add {
+                                    gap: 10px;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    .group {
+                                        label {
+                                            color: @lightGray;
+                                        }
+    
+                                        input, textarea, select{
+                                            color: @darkGray;
+                                            background-color: @lightGray;
+                                        }
+
+                                        textarea, select {
+                                            &::-webkit-scrollbar {
+                                                width: 5px;
+                                            }
+                            
+                                            &::-webkit-scrollbar-track {
+                                                background: @lightGray;
+                                            }
+                            
+                                            &::-webkit-scrollbar-thumb {
+                                                background: @darkGray;
+                                                border-radius: 10px;
+                                            }
+                                        }
+
+                                        select {
+                                            option {
+                                                background-color: @lightGray;
+                                            }
+                                        }
+                                        .title, .companyName, .startDate, .endDate, .formation {
+                                            width: 100%;
+                                            height: 40px;
+                                            display: flex;
+                                            padding: 0 10px;
+                                            align-items: center;
+                                            background-color: @lightGray;
+                                        }
+
+                                        .description {
+                                            width: 100%;
+                                            height: 100px;
+                                            display: flex;
+                                            padding: 10px;
+                                            align-items: center;
+                                            background-color: @lightGray;
+                                        }
+
+                                        .button {
+                                            width: 100%;
+                                            height: 40px;
+                                            border: none;
+                                            cursor: pointer;
+                                            color: @darkGray;
+                                            font-weight: bold;
+                                            text-align: center;
+                                            font-family: 'Inter';
+                                            background-color: @yellow;
+                                            outline: 2px solid @darkGray;
+                                            transition: outline-offset 200ms ease;
+                        
+                                            &:hover {
+                                                outline-offset: -6px;
+                                                outline: 2px solid @darkGray;
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+
+                            .openToWork {
+                                label {
+                                    width: 50px;
+                                    height: 30px;
+                                    margin: 0 auto;
+                                    display: block;
+                                    cursor: pointer;
+                                    position: relative;
+                                    text-indent: -9999px;
+                                    background: @lightGray;
+                                }
+                                
+                                label:after {
+                                    top: 5px;
+                                    left: 5px;
+                                    content: '';
+                                    width: 20px;
+                                    height: 20px;
+                                    transition: 0.3s;
+                                    background: #fff;
+                                    position: absolute;
+                                }
+                                
+                                input:checked + label {
+                                    background: @yellow;
+                                }
+                                
+                                input:checked + label:after {
+                                    left: calc(100% - 5px);
+                                    transform: translateX(-100%);
+                                }
+                                
+                                label:active:after {
+                                    width: 40px;
                                 }
                             }
                         }
