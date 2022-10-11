@@ -12,7 +12,7 @@ import { AuthService } from '../../core/service/auth.service';
 export class WorkersComponent implements OnInit {
   roleType: string = '';
 
-  arrayWorkers = [];
+  arrayWorkers: any[] = [];
 
   constructor(private authService: AuthService) {}
 
@@ -39,7 +39,6 @@ export class WorkersComponent implements OnInit {
     if (role == 'ROLE_RECRUITER') {
       this.authService.userOpenToWork().subscribe({
         next: (response) => {
-          console.log(response);
           this.arrayWorkers = response;
         },
         error: (error) => {

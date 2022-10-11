@@ -36,7 +36,8 @@
             .image {
                 width: 100px;
                 height: 100px;
-                background-size: contain;
+                border-radius: 50%;
+                background-size: 100%;
                 background-position: center;
                 background-repeat: no-repeat;
             }
@@ -59,7 +60,7 @@
                 flex-direction: column;
             }
 
-            .email, .vacancies, .tests, .openToWork, .jobs, .academic, .skills, .certificate {
+            .email, .vacancies, .tests, .openToWork, .jobs, .academic, .skills {
                 p {
                     gap: 2px;
                     display: flex;
@@ -157,6 +158,10 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+
+                &.roleRecruiter {
+                    height: 100%;
+                }
     
                 .account {
                     gap: 20px;
@@ -223,7 +228,7 @@
                                 background-color: @darkGray;
                             }
 
-                            .jobs, .studies {
+                            .jobs, .studies, .skills {
                                 gap: 10px;
                                 width: 100%;
                                 height: auto;
@@ -233,7 +238,7 @@
                                 flex-direction: column;
                                 background-color: @darkGray;
 
-                                .job, .study {
+                                .job, .study, .skill {
                                     gap: 5px;
                                     width: 100%;
                                     height: 150px;
@@ -254,6 +259,20 @@
                                     .infos, .dates {
                                         display: flex;
                                         justify-content: space-between;
+
+                                        .group {
+                                            align-items: baseline;
+                                            flex-direction: row;
+                                        }
+
+                                        .icon {
+                                            width: 20px;
+                                            height: 20px;
+                                            cursor: pointer;
+                                            background-size: contain;
+                                            background-repeat: no-repeat;
+                                            background-image: url(../../../../assets/icons/trash.png);
+                                        }
                                     }
 
                                     .description {
@@ -278,6 +297,10 @@
                                             }
                                         }
                                     }
+                                }
+
+                                .skill {
+                                    height: auto;
                                 }
 
                                 .add {

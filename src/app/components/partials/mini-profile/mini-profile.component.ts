@@ -1,8 +1,8 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { AcademicFormationGetResponseDto } from 'src/app/core/types/academic-formation-dto';
 import { JobExperienceGetResponseDto } from 'src/app/core/types/job-experience-get-response';
 import { UserUpdateDto } from 'src/app/core/types/user-update-dto';
+import { SkillGetResponseDto } from 'src/app/core/types/skill-get-response-dto';
 import Swal from 'sweetalert2';
 
 // Auth
@@ -26,7 +26,7 @@ export class MiniProfileComponent implements OnInit {
   academicFormation: any[] = [];
   certificates = [];
   jobExperiences: any[] = [];
-  skills = [];
+  skills: any[] = [];
   tests = [];
 
   titleJob: string = '';
@@ -40,6 +40,8 @@ export class MiniProfileComponent implements OnInit {
   descriptionStudy: string = '';
   startStudy: string = '';
   endStudy: string = '';
+
+  titleSkill: string = '';
 
   selectedFiles: any = null;
 
@@ -149,6 +151,7 @@ export class MiniProfileComponent implements OnInit {
         openToWork: openToWork,
         jobExperiences: this.jobExperiences,
         academicFormation: this.academicFormation,
+        skills: this.skills,
       };
     }
 
@@ -201,6 +204,18 @@ export class MiniProfileComponent implements OnInit {
     }
   }
 
+  deleteJob(job: any) {
+    for (let i = 0; i < this.jobExperiences.length; i++) {
+      if (
+        this.jobExperiences[i].jobTitle === job.jobTitle &&
+        this.jobExperiences[i].companyName === job.companyName &&
+        this.jobExperiences[i].startDate === job.startDate
+      ) {
+        this.jobExperiences.splice(i, 1);
+      }
+    }
+  }
+
   addStudy(study: any) {
     let title = study.value.titleStudy;
     let formation = study.value.formationStudy;
@@ -247,6 +262,47 @@ export class MiniProfileComponent implements OnInit {
       this.descriptionStudy = '';
       this.startStudy = '';
       this.endStudy = '';
+    }
+  }
+
+  deleteStudy(study: any) {
+    for (let i = 0; i < this.academicFormation.length; i++) {
+      if (
+        this.academicFormation[i].institutionName === study.institutionName &&
+        this.academicFormation[i].academicFormationType ===
+          study.academicFormationType &&
+        this.academicFormation[i].startDate === study.startDate
+      ) {
+        this.academicFormation.splice(i, 1);
+      }
+    }
+  }
+
+  addSkill(skill: any) {
+    let title = skill.value.titleSkill;
+    let skillObject: SkillGetResponseDto;
+
+    if (title == '') {
+      Swal.fire({
+        text: 'Preencha o campo necessário!',
+        icon: 'warning',
+      });
+    } else {
+      skillObject = {
+        skillName: title,
+      };
+
+      this.skills.push(skillObject);
+
+      this.titleSkill = '';
+    }
+  }
+
+  deleteSkill(skill: any) {
+    for (let i = 0; i < this.skills.length; i++) {
+      if (this.skills[i].skillName === skill.skillName) {
+        this.skills.splice(i, 1);
+      }
     }
   }
 

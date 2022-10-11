@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
   contractModalEdit: string = '';
   switchModalEdit: boolean = false;
 
+  resume: any = null;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -181,13 +183,20 @@ export class HomeComponent implements OnInit {
 
   applyVacancy(vacancy: any) {
     let id = vacancy.id;
+    let resume = this.resume;
 
-    this.authService.vacancyApply(id).subscribe({
+    this.authService.vacancyApply(id, resume).subscribe({
       next: (response) => {
-        console.log(response);
+        Swal.fire({
+          text: 'Candidatura realizada com sucesso!',
+          icon: 'success',
+        });
       },
       error: (error) => {
-        console.log(error);
+        Swal.fire({
+          text: 'Você já se candidatou para essa vaga!',
+          icon: 'error',
+        });
       },
     });
   }

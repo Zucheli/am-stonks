@@ -22,6 +22,19 @@
         <div class="openToWork">
           <p><span>aberto a vagas:</span> {{ openToWork }}</p>
         </div>
+        <div class="jobs">
+          <p>
+            <span>experiências profissionais:</span> {{ jobExperiences.length }}
+          </p>
+        </div>
+        <div class="academic">
+          <p>
+            <span>formações academêmicas:</span> {{ academicFormation.length }}
+          </p>
+        </div>
+        <div class="skills">
+          <p><span>skills:</span> {{ skills.length }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -49,7 +62,11 @@
     </div>
     <div class="modalContent">
       <h2>Editar usuário</h2>
-      <form #m="ngForm" (ngSubmit)="saveUser(m)">
+      <form
+        #m="ngForm"
+        (ngSubmit)="saveUser(m)"
+        [ngClass]="{ roleRecruiter: roleType == 'ROLE_RECRUITER' }"
+      >
         <div class="account">
           <div class="row">
             <div class="group">
@@ -122,6 +139,7 @@
                     <p>
                       <span><i>empresa:</i></span> {{ job.companyName }}
                     </p>
+                    <div class="icon" (click)="deleteJob(job)"></div>
                   </div>
                   <div class="description">
                     <span><i>descrição:</i></span>
@@ -229,6 +247,7 @@
                       <span><i>formação:</i></span>
                       Ensino Médio
                     </p>
+                    <div class="icon" (click)="deleteStudy(study)"></div>
                   </div>
                   <div class="description">
                     <span><i>descrição:</i></span>
@@ -300,6 +319,40 @@
                             type="date"
                             name="endStudy"
                             [(ngModel)]="endStudy"
+                          />
+                        </div>
+                      </div>
+                      <div class="group">
+                        <input class="button" type="submit" value="Adicionar" />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="roleType == 'ROLE_WORKER'">
+            <div class="group">
+              <label>Skills:</label>
+              <div class="skills">
+                <div class="skill" *ngFor="let skill of skills">
+                  <div class="infos">
+                    <p>
+                      <span><i>skill:</i></span> {{ skill.skillName }}
+                    </p>
+                    <div class="icon" (click)="deleteSkill(skill)"></div>
+                  </div>
+                </div>
+                <form #skill="ngForm" (ngSubmit)="addSkill(skill)">
+                  <div class="add">
+                    <div class="row">
+                      <div class="group">
+                        <label>Skill:</label>
+                        <div class="title">
+                          <input
+                            type="text"
+                            name="titleSkill"
+                            [(ngModel)]="titleSkill"
                           />
                         </div>
                       </div>

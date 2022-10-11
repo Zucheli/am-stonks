@@ -104,9 +104,16 @@ export class AuthService {
     );
   }
 
-  vacancyApply(id: any): Observable<any> {
-    return this.http.post<any>(`${this.baseURL}/vacancies/${id}/apply`, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
-    });
+  vacancyApply(id: any, resume: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('resume', resume);
+
+    return this.http.post<any>(
+      `${this.baseURL}/vacancies/${id}/apply`,
+      formData,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+      }
+    );
   }
 }

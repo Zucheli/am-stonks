@@ -7,7 +7,104 @@
     <div class="divider"></div>
 
     <div class="workers">
-      <div class="worker" *ngFor="let worker of arrayWorkers"></div>
+      <div class="worker" *ngFor="let worker of arrayWorkers">
+        <div class="top">
+          <div
+            class="image"
+            [style.backgroundImage]="
+              worker.photo == null
+                ? 'url(../../../../assets/imageDefault.png)'
+                : 'url(' + worker.photo + ')'
+            "
+          ></div>
+          <div class="infos">
+            <p class="name">{{ worker.firstName }} {{ worker.lastName }}</p>
+            <p class="email">{{ worker.email }}</p>
+          </div>
+        </div>
+        <div class="middle">
+          <div class="jobs">
+            <p>experiências profissionais:</p>
+            <span *ngIf="worker.jobExperiences == 0">
+              nenhuma experiência cadastrada
+            </span>
+            <div class="job" *ngFor="let job of worker.jobExperiences">
+              <div class="infos">
+                <p class="title"><span>cargo:</span> {{ job.jobTitle }}</p>
+                <p class="company">
+                  <span>empresa: </span>{{ job.companyName }}
+                </p>
+              </div>
+              <div class="description">
+                <p><span>descrição:</span></p>
+                <p>
+                  {{ job.description }}
+                </p>
+              </div>
+              <div class="dates">
+                <p>
+                  <span><i>data de início:</i></span> {{ job.startDate }}
+                </p>
+                <p>
+                  <span><i>date de saída:</i></span> {{ job.endDate }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="studies">
+            <p>formação acadêmica:</p>
+            <span *ngIf="worker.academicFormation == 0">
+              nenhuma formação cadastrada
+            </span>
+            <div class="study" *ngFor="let study of worker.academicFormation">
+              <div class="infos">
+                <p class="title">
+                  <span>instituição:</span> {{ study.institutionName }}
+                </p>
+                <p *ngIf="study.academicFormationType == 'BACHELOR_DEGREE'">
+                  <span><i>formação:</i></span>
+                  Bacharelado
+                </p>
+                <p *ngIf="study.academicFormationType == 'TECHNICAL_DEGREE'">
+                  <span><i>formação:</i></span>
+                  Técnico
+                </p>
+                <p *ngIf="study.academicFormationType == 'SCHOOL'">
+                  <span><i>formação:</i></span>
+                  Ensino Fundamental
+                </p>
+                <p *ngIf="study.academicFormationType == 'HIGH_SCHOOL'">
+                  <span><i>formação:</i></span>
+                  Ensino Médio
+                </p>
+              </div>
+              <div class="description">
+                <p><span>descrição:</span></p>
+                <p>
+                  {{ study.description }}
+                </p>
+              </div>
+              <div class="dates">
+                <p>
+                  <span><i>data de início:</i></span> {{ study.startDate }}
+                </p>
+                <p>
+                  <span><i>date de saída:</i></span> {{ study.endDate }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="skills">
+            <p>skills:</p>
+            <span *ngIf="worker.skills == 0"> nenhuma skill cadastrada </span>
+            <div class="skill" *ngFor="let skill of worker.skills">
+              <div class="infos">
+                <p class="title"><span>skill:</span> {{ skill.skillName }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
