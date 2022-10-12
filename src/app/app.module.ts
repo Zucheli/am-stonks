@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { MiniProfileComponent } from './components/partials/mini-profile/mini-profile.component';
 import { WorkersComponent } from './components/workers/workers.component';
+import { TestsComponent } from './components/tests/tests.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { WorkersComponent } from './components/workers/workers.component';
     HeaderComponent,
     MiniProfileComponent,
     WorkersComponent,
+    TestsComponent,
   ],
   imports: [
     BrowserModule,

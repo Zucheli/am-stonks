@@ -35,6 +35,9 @@
         <div class="skills">
           <p><span>skills:</span> {{ skills.length }}</p>
         </div>
+        <div class="certificates">
+          <p><span>certificados:</span> {{ certificates.length }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -139,7 +142,10 @@
                     <p>
                       <span><i>empresa:</i></span> {{ job.companyName }}
                     </p>
-                    <div class="icon" (click)="deleteJob(job)"></div>
+                    <div class="buttons">
+                      <div class="edit"></div>
+                      <div class="delete" (click)="deleteJob(job)"></div>
+                    </div>
                   </div>
                   <div class="description">
                     <span><i>descrição:</i></span>
@@ -247,7 +253,10 @@
                       <span><i>formação:</i></span>
                       Ensino Médio
                     </p>
-                    <div class="icon" (click)="deleteStudy(study)"></div>
+                    <div class="buttons">
+                      <div class="edit"></div>
+                      <div class="delete" (click)="deleteStudy(study)"></div>
+                    </div>
                   </div>
                   <div class="description">
                     <span><i>descrição:</i></span>
@@ -340,7 +349,10 @@
                     <p>
                       <span><i>skill:</i></span> {{ skill.skillName }}
                     </p>
-                    <div class="icon" (click)="deleteSkill(skill)"></div>
+                    <div class="buttons">
+                      <div class="edit"></div>
+                      <div class="delete" (click)="deleteSkill(skill)"></div>
+                    </div>
                   </div>
                 </div>
                 <form #skill="ngForm" (ngSubmit)="addSkill(skill)">
@@ -362,6 +374,25 @@
                     </div>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="roleType == 'ROLE_WORKER'">
+            <div class="group">
+              <label>Certificados:</label>
+              <div class="certificates">
+                <div
+                  class="certificate"
+                  *ngFor="let certificate of certificates"
+                >
+                  <div class="infos">
+                    <p>
+                      <span><i>certificado em:</i></span>
+                      {{ certificate.skillName }}
+                    </p>
+                    <div class="badge"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

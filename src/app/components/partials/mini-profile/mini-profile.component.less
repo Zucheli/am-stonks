@@ -60,7 +60,7 @@
                 flex-direction: column;
             }
 
-            .email, .vacancies, .tests, .openToWork, .jobs, .academic, .skills {
+            .email, .vacancies, .tests, .openToWork, .jobs, .academic, .skills, .certificates {
                 p {
                     gap: 2px;
                     display: flex;
@@ -73,16 +73,6 @@
                     span {
                         color: @yellow;
                         font-size: 12px;
-
-                        &.plus {
-                            width: 25px;
-                            height: 25px;
-                            cursor: pointer;
-                            display: inline-block;
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-image: url(../../../../assets/icons/plus.svg);
-                        }
                     }
                 }
             }
@@ -90,7 +80,7 @@
     }
 }
 
-.modal, .modalAdd {
+.modal {
     top: 0;
     left: 0;
     z-index: 1;
@@ -175,7 +165,7 @@
                         align-items: flex-end;
                         justify-content: space-between;
 
-                        .group, .subgroup{
+                        .group, .subgroup {
                             gap: 5px;
                             width: 100%;
                             display: flex;
@@ -228,7 +218,7 @@
                                 background-color: @darkGray;
                             }
 
-                            .jobs, .studies, .skills {
+                            .jobs, .studies, .skills, .certificates {
                                 gap: 10px;
                                 width: 100%;
                                 height: auto;
@@ -238,7 +228,7 @@
                                 flex-direction: column;
                                 background-color: @darkGray;
 
-                                .job, .study, .skill {
+                                .job, .study, .skill, .certificate {
                                     gap: 5px;
                                     width: 100%;
                                     height: 150px;
@@ -258,6 +248,7 @@
 
                                     .infos, .dates {
                                         display: flex;
+                                        align-items: center;
                                         justify-content: space-between;
 
                                         .group {
@@ -265,13 +256,35 @@
                                             flex-direction: row;
                                         }
 
-                                        .icon {
-                                            width: 20px;
-                                            height: 20px;
-                                            cursor: pointer;
+                                        .badge {
+                                            width: 30px;
+                                            height: 30px;
                                             background-size: contain;
                                             background-repeat: no-repeat;
-                                            background-image: url(../../../../assets/icons/trash.png);
+                                            background-image: url(../../../../assets/icons/java.svg);
+                                        }
+
+                                        .buttons {
+                                            gap: 5px;
+                                            display: flex;
+
+                                            .edit, .delete {
+                                                cursor: pointer;
+                                                background-size: contain;
+                                                background-repeat: no-repeat;
+                                            }
+
+                                            .edit {
+                                                width: 24px;
+                                                height: 24px;
+                                                background-image: url(../../../../assets/icons/pen.svg);
+                                            }
+
+                                            .delete {
+                                                width: 20px;
+                                                height: 20px;
+                                                background-image: url(../../../../assets/icons/trash.svg);
+                                            }
                                         }
                                     }
 
@@ -299,7 +312,7 @@
                                     }
                                 }
 
-                                .skill {
+                                .skill, .certificate {
                                     height: auto;
                                 }
 
@@ -339,6 +352,7 @@
                                                 background-color: @lightGray;
                                             }
                                         }
+
                                         .title, .companyName, .startDate, .endDate, .formation {
                                             width: 100%;
                                             height: 40px;

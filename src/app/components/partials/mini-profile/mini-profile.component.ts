@@ -23,8 +23,9 @@ export class MiniProfileComponent implements OnInit {
   openToWork: string = '';
   openToWorkModal: boolean = false;
   roleType: string = '';
+
   academicFormation: any[] = [];
-  certificates = [];
+  certificates: any[] = [];
   jobExperiences: any[] = [];
   skills: any[] = [];
   tests = [];
@@ -44,8 +45,8 @@ export class MiniProfileComponent implements OnInit {
   titleSkill: string = '';
 
   selectedFiles: any = null;
-
   numberVacancies: number = 0;
+  buttonEditSkill: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -54,7 +55,6 @@ export class MiniProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLogged();
-    this.showModal();
   }
 
   selectFile(event: any) {
@@ -76,6 +76,7 @@ export class MiniProfileComponent implements OnInit {
         if (this.roleType == 'ROLE_WORKER') {
           this.authService.userInfos(this.id).subscribe({
             next: (response) => {
+              console.log(response);
               this.academicFormation = response.academicFormation;
               this.certificates = response.certificates;
               this.jobExperiences = response.jobExperiences;

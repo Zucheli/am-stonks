@@ -1,0 +1,76 @@
+<section class="container">
+  <app-header></app-header>
+
+  <div class="content">
+    <app-mini-profile></app-mini-profile>
+
+    <div class="divider"></div>
+
+    <div class="tests">
+      <div class="test" *ngFor="let test of arrayTests">
+        <div class="infos">
+          <p>
+            <span><i>skill do teste:</i></span> {{ test.skill.skillName }}
+          </p>
+          <p>
+            <span><i>número de perguntas:</i></span>
+            {{ test.questions.length }}
+          </p>
+        </div>
+        <div class="start">
+          <div class="button" (click)="openTest(test)">
+            <p>Iniciar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modalTest" id="modalTest">
+  <div class="backdrop" (click)="closeTest()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeTest()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Teste de {{ testSkillName }}</h2>
+      <form #t="ngForm" (ngSubmit)="saveTest(t)">
+        <div class="questions">
+          <div class="question" *ngFor="let question of testQuestions">
+            <p>
+              <span>questão {{ question.id }} -</span> {{ question.question }}
+            </p>
+            <div class="answers">
+              <div class="answer" *ngFor="let answer of question.answers">
+                <p>{{ answer.answerDescription }}</p>
+                <input
+                  type="radio"
+                  [name]="'questao' + question.id"
+                  [value]="answer.id"
+                  ngModel
+                />
+                <div class="color"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Enviar" />
+      </form>
+    </div>
+  </div>
+</div>

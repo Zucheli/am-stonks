@@ -116,4 +116,20 @@ export class AuthService {
       }
     );
   }
+
+  tests(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/tests`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  testApply(id: number, request: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseURL}/tests/${id}/revision`,
+      request,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+      }
+    );
+  }
 }

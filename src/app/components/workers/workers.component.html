@@ -103,6 +103,23 @@
               </div>
             </div>
           </div>
+          <div class="certificates">
+            <p>certificados:</p>
+            <span *ngIf="worker.certificates == 0">
+              nenhum certificado conquistado
+            </span>
+            <div
+              class="certificate"
+              *ngFor="let certificate of worker.certificates"
+            >
+              <div class="infos">
+                <p class="title">
+                  <span>certificado em:</span> {{ certificate.skillName }}
+                </p>
+                <div class="badge"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
